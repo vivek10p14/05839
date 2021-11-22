@@ -1,0 +1,55 @@
+Circuits -> ['circuitId', 'circuitRef', 'name', 'location', 'country', 'lat', 'lng', 'alt', 'url']
+total 77 rows -> all unique names
+
+constructor_results -> ['constructorResultsId', 'raceId', 'constructorId', 'points', 'status']
+status-> unknown (['\\N', 'D'])
+
+constructors -> ['constructorId', 'constructorRef', 'name', 'nationality', 'url']
+Mapping of constructor id to constructor details
+Mainly useful for enriching data
+
+driver_standings -> ['driverStandingsId', 'raceId', 'driverId', 'points', 'position', 'positionText', 'wins']
+wins col unknown -> [ 1,  0,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13]
+driver_standings in each race and points received
+
+drivers -> ['driverId', 'driverRef', 'number', 'code', 'forename', 'surname', 'dob', 'nationality', 'url']
+driver information, again useful for enriching data
+
+lap_times -> ['raceId', 'driverId', 'lap', 'position', 'time', 'milliseconds']
+time taken by each diver to complete a lap in each race
+
+pit_stops -> ['raceId', 'driverId', 'stop', 'lap', 'time', 'duration', 'milliseconds']
+Time spent in pitlane by each driver in each race
+
+qualifying -> ['qualifyId', 'raceId', 'driverId', 'constructorId', 'number', 'position', 'q1', 'q2', 'q3']
+qualifying times of each driver in each race
+
+races -> ['raceId', 'year', 'round', 'circuitId', 'name', 'date', 'time', 'url']
+race info, when and where was/is each race held
+
+results -> ['resultId', 'raceId', 'driverId', 'constructorId', 'number', 'grid',
+       'position', 'positionText', 'positionOrder', 'points', 'laps', 'time',
+       'milliseconds', 'fastestLap', 'rank', 'fastestLapTime',
+       'fastestLapSpeed', 'statusId']
+statusId -> unknown
+who got fastest lap, when was fastest lap achieved, avg. speed in fastest lap
+
+seasons -> ['year', 'url']
+Just mapping year to season wiki page, not useful
+
+status -> ['statusId', 'status']
+Probably useful for enriching but not sure where to map
+
+
+Insights-
+1. How speeds race laptimes have reduced over the years (together - per constructor - per circuit)
+2. How qualifying laptimes have reduced over the years (together - per constructor - per circuit)
+3. Driver improvement over the years (normalize for constructor, but how??)
+4. Constructor performance over the years
+5. Pit stop performance by constructor
+6. Driver performance by pit stop (stationary time difficult to compute)
+
+
+ML- (possibly too less data to train ML models)
+1. Predicting Final race rankings from qualifying positions
+2. Predicting qualifying time requirements based on previous year data
