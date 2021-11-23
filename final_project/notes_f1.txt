@@ -48,7 +48,7 @@ Insights-
 4. Constructor performance over the years
 5. Pit stop performance by constructor
 6. Driver performance by pit stop (stationary time difficult to compute)
-
+7. Margin of victory for each driver
 
 ML- (possibly too less data to train ML models)
 1. Predicting Final race rankings from qualifying positions
