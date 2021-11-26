@@ -9,8 +9,8 @@ import plotly.figure_factory as ff
 from streamlit_metrics import metric, metric_row
 import os
 
-os.sys("ls")
-os.sys("pip install -r requirements.txt")
+os.system("ls")
+os.system("pip install -r requirements.txt")
 
 st.set_page_config(layout="wide")
 
