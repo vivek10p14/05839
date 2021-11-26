@@ -7,7 +7,9 @@ import plotly.graph_objects as go
 import pydeck as pdk
 import plotly.figure_factory as ff
 from streamlit_metrics import metric, metric_row
+import os
 
+os.sys("pip install -r requirements.txt")
 
 st.set_page_config(layout="wide")
 
@@ -192,7 +194,7 @@ start_ride_distribution = start_ride_distribution.merge(station_df, left_on='sta
 start_ride_distribution = start_ride_distribution.sort_values(by='start_hour')
 
 min_val = start_ride_distribution['count'].min()
-max_val = start_ride_distribution['count'].max()
+max_val = start_ride_distribution['count'].max()//2
 
 fig = px.density_mapbox(start_ride_distribution, lat='latitude', lon='longitude', z='count', radius=10, center=dict(lat=42.361001, lon=-71.084025), zoom=11, mapbox_style="stamen-terrain", hover_name='name', range_color=[min_val, max_val], animation_frame='start_hour', animation_group='id')
 
@@ -267,11 +269,9 @@ count_df['day_int'] = count_df['start_day'].apply(lambda x: day_dict[x])
 
 count_df = count_df.sort_values(by=['month', 'day_int'])
 
-count_df = count_df.rename(columns={'start_day':'Day of Week', 'count':'Number of Trips', 'month':'Month'})
+max_val = (count_df['count'].max())*1.5
 
-max_val = (count_df['Number of Trips'].max())*1.5
-
-fig = px.bar(count_df, x = 'Day of Week', y='Number of Trips', color='Day of Week', animation_frame='Month', animation_group='Day of Week', range_y=[0, max_val])
+fig = px.bar(count_df, x = 'start_day', y='count', color='start_day', animation_frame='month', animation_group='start_day', range_y=[0, max_val])
 
 row2_col1.plotly_chart(fig)
 
