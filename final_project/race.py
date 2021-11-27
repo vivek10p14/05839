@@ -12,10 +12,10 @@ import os
 
 @st.cache
 def load_data():
-    race_df = pd.read_csv('archive/races.csv')
+    race_df = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/races.csv')
     race_df = race_df.astype({'year':'str'})
-    laps = pd.read_csv('archive/lap_times.csv')
-    driver_name = pd.read_csv('archive/drivers.csv')
+    laps = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/lap_times.csv')
+    driver_name = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/drivers.csv')
 
     return race_df, laps, driver_name
 
