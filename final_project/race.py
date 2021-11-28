@@ -23,7 +23,7 @@ def load_data():
 
     return race_df, laps, driver_name
 
-
+os.system('pip install -r requirements.txt')
 
 def init():
     st.set_page_config(layout="wide")
