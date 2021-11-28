@@ -11,6 +11,7 @@ from streamlit.elements import plotly_chart
 from streamlit_metrics import metric, metric_row
 import numpy as np
 import os
+import matplotlib.colors as colors
 
 @st.cache
 def load_data():
@@ -60,6 +61,7 @@ def update_race_first():
     if st.session_state.race:
         st.session_state.race = race_df[race_df.year == st.session_state['race_year']]['name'].unique().tolist()[0]
 
+colors_list = list(colors._colors_full_map.values())
 
 row1_col1, row1_col2 = st.columns(2)
 
@@ -123,7 +125,7 @@ else:
                       ])]
                   )])
     layout.update(xaxis =dict(range=[0, num_laps+1], autorange=False),
-              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800, colorway=px.colors.sequential.Plasma[:25])
+              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800, colorway=colors_list[:len(driver_list)])
     fig = go.Figure(data=traces, frames=frames, layout=layout)
     fig.update_yaxes(autorange="reversed")
     col1.plotly_chart(fig)
