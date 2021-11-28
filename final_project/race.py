@@ -129,7 +129,7 @@ else:
     fig = go.Figure(data=traces, frames=frames, layout=layout)
     fig.update_yaxes(autorange="reversed")
     col1.plotly_chart(fig)
-    race_results = pd.read_csv('archive/enriched_results.csv')
+    race_results = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/enriched_results.csv')
     race_results = race_results[race_results['raceId'] == race_id]
     race_results = race_results.drop('raceId', axis=1)
     race_results = race_results.replace('\\N', 'N.A.')
