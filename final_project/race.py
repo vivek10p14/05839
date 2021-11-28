@@ -60,7 +60,7 @@ def update_race_first():
     if st.session_state.race:
         st.session_state.race = race_df[race_df.year == st.session_state['race_year']]['name'].unique().tolist()[0]
 
-dum1, row1_col1, row1_col2, dum2 = st.columns([1,1,5,1])
+dum1, row1_col1, row1_col2, dum2 = st.columns([0.5,2,6,0.5])
 # row1_col1 = st.container()
 
 row1_col1.selectbox("Select Year", race_df['year'].sort_values().unique().tolist(), on_change=handle_change_race_year, key='race_year')
