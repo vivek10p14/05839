@@ -12,6 +12,7 @@ from streamlit_metrics import metric, metric_row
 import numpy as np
 import os
 import matplotlib.colors as colors
+import random
 
 @st.cache
 def load_data():
@@ -61,8 +62,6 @@ def update_race_first():
     if st.session_state.race:
         st.session_state.race = race_df[race_df.year == st.session_state['race_year']]['name'].unique().tolist()[0]
 
-colors_list = list(colors._colors_full_map.values())
-
 row1_col1, row1_col2 = st.columns(2)
 
 row1_col1.selectbox("Select Year", race_df['year'].sort_values().unique().tolist(), on_change=handle_change_race_year, key='race_year')
@@ -89,6 +88,7 @@ else:
     df = laps
     driver_list = df['driverId'].unique().tolist()
     driver_df = []
+    colors_list = list(colors._colors_full_map.values())
     for driver in driver_list:
         temp = df[df['driverId']==driver]
         temp = temp.sort_values('lap')
@@ -125,18 +125,20 @@ else:
                       ])]
                   )])
     layout.update(xaxis =dict(range=[0, num_laps+1], autorange=False),
-              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800, colorway=colors_list[:len(driver_list)])
+              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800, colorway=random.sample(colors_list,  len(driver_list)))
     fig = go.Figure(data=traces, frames=frames, layout=layout)
     fig.update_yaxes(autorange="reversed")
     col1.plotly_chart(fig)
-    race_results = pd.read_csv('archive/results.csv')
+    race_results = pd.read_csv('archive/enriched_results.csv')
     race_results = race_results[race_results['raceId'] == race_id]
+    race_results = race_results.drop('raceId', axis=1)
+    race_results = race_results.replace('\\N', 'N.A.')
     col2.write('\n')
     col2.write('\n')
     col2.write('\n')
     col2.write('\n')
     col2.write('\n')
-    col2.dataframe(race_results, height=1000)
+    col2.dataframe(race_results.reset_index().drop('index', axis=1), height=1000)
 
 
 
