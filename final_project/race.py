@@ -1,4 +1,5 @@
 from re import S
+from _plotly_utils.colors import colorscale_to_scale
 from plotly import colors
 import streamlit as st
 import pandas as pd
@@ -97,7 +98,7 @@ else:
     for i in range(len(driver_df)):
         temp_df = driver_df[i]
         t = go.Scatter(x=temp_df['lap'][:1], 
-                        y=temp_df['position'][:2], mode='lines',
+                        y=temp_df['position'][:2], mode='lines+markers',
                         line=dict(width=1.5), name=driver_dict[driver_list[i]])
         traces.append(t)
 
@@ -122,7 +123,7 @@ else:
                       ])]
                   )])
     layout.update(xaxis =dict(range=[0, num_laps+1], autorange=False),
-              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800)
+              yaxis =dict(range=[0, len(driver_list)+1], autorange=False), height=800, width=800, colorway=px.colors.sequential.Plasma[:25])
     fig = go.Figure(data=traces, frames=frames, layout=layout)
     fig.update_yaxes(autorange="reversed")
     col1.plotly_chart(fig)
