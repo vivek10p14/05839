@@ -63,8 +63,8 @@ def update_race_first():
         st.session_state.race = race_df[race_df.year == st.session_state['race_year']]['name'].unique().tolist()[0]
 
 try:
-    dum1, row1_col1, row1_col2, dum2 = st.columns([0.5,2,6,0.5])
-    # row1_col1 = st.container()
+    # dum1, row1_col1, row1_col2, dum2 = st.columns([0.5,2,6,0.5])
+    row1_col1 = st.container()
 
     row1_col1.selectbox("Select Year", race_df['year'].sort_values().unique().tolist(), on_change=handle_change_race_year, key='race_year')
     row1_col1.selectbox("Select Race", race_list, on_change=handle_change_race, key='race')
@@ -82,7 +82,8 @@ try:
     total_laps = len(laps)
 
     # col1, col2 = st.columns(2)
-    d1, col1, d2 = st.columns([1,6,1])
+    # d1, col1, d2 = st.columns([1,6,1])
+    col1 = st.container()
     col2 = st.container()
 
     if total_laps <= 400:
@@ -141,7 +142,7 @@ try:
         race_results = race_results.sort_values('Standing')
         race_results= race_results.astype({'Standing':'str'})
         race_results['Standing'] = race_results['Standing'].replace('1000', 'N.A.')
-        row1_col2.dataframe(race_results.reset_index().drop('index', axis=1))
+        col1.dataframe(race_results.reset_index().drop('index', axis=1), height=500)
 except:
     st.write("Unexpected Error Occured Please Refresh The Page")
 
