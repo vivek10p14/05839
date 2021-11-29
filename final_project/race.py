@@ -24,7 +24,7 @@ def load_data():
     return race_df, laps, driver_name
 
 def init():
-    st.set_page_config(layout="wide")
+    st.set_page_config(layout="centered")
     if 'race_year' not in st.session_state:
         st.session_state['race_year'] = "1950"
 
