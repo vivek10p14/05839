@@ -24,7 +24,7 @@ def load_data():
     return race_df, laps, driver_name
 
 def init():
-    st.set_page_config(layout="centered")
+    st.set_page_config(layout="wide")
     if 'race_year' not in st.session_state:
         st.session_state['race_year'] = "1950"
 
@@ -63,8 +63,8 @@ def update_race_first():
         st.session_state.race = race_df[race_df.year == st.session_state['race_year']]['name'].unique().tolist()[0]
 
 try:
-    # dum1, row1_col1, row1_col2, dum2 = st.columns([0.5,2,6,0.5])
-    row1_col1 = st.container()
+    row1_col1, dum2 = st.columns([8, 2])
+    # row1_col1 = st.container()
 
     row1_col1.selectbox("Select Year", race_df['year'].sort_values().unique().tolist(), on_change=handle_change_race_year, key='race_year')
     row1_col1.selectbox("Select Race", race_list, on_change=handle_change_race, key='race')
@@ -83,8 +83,8 @@ try:
 
     # col1, col2 = st.columns(2)
     # d1, col1, d2 = st.columns([1,6,1])
-    col1 = st.container()
-    col2 = st.container()
+    col1, d1 = st.columns([8, 2])
+    col2, d2 = st.columns([8, 2])
 
     if total_laps <= 400:
         col1.write('Not enough Data available select another race')
