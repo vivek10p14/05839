@@ -141,11 +141,6 @@ try:
         race_results = race_results.sort_values('Standing')
         race_results= race_results.astype({'Standing':'str'})
         race_results['Standing'] = race_results['Standing'].replace('1000', 'N.A.')
-        col2.write('\n')
-        col2.write('\n')
-        col2.write('\n')
-        col2.write('\n')
-        col2.write('\n')
         row1_col2.dataframe(race_results.reset_index().drop('index', axis=1))
 except:
     st.write("Unexpected Error Occured Please Refresh The Page")
