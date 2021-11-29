@@ -17,6 +17,7 @@ import random
 @st.cache
 def load_data():
     race_df = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/races.csv')
+    race_df = race_df[race_df['year']>=2000]
     race_df = race_df.astype({'year':'str'})
     laps = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/lap_times.csv')
     driver_name = pd.read_csv('https://raw.githubusercontent.com/vivek10p14/05839/master/final_project/archive/drivers.csv')
@@ -26,10 +27,10 @@ def load_data():
 def init():
     st.set_page_config(layout="wide")
     if 'race_year' not in st.session_state:
-        st.session_state['race_year'] = "1950"
+        st.session_state['race_year'] = "2000"
 
     if 'race' not in st.session_state:
-        st.session_state['race'] = "Belgian Grand Prix"
+        st.session_state['race'] = "Australian Grand Prix"
 
 init()
 # print("check point")
@@ -87,7 +88,7 @@ try:
     col2, d2 = st.columns([5, 5])
 
     if total_laps <= 400:
-        col1.write('Not enough Data available select another race')
+        col1.write('Race Data Not Available')
 
     else:
         df = laps
